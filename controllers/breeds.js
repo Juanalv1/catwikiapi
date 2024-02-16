@@ -7,7 +7,7 @@ class BreedController {
       const breeds = await BreedModel.getMany({ onlyNames, limit, top });
       res.json(breeds);
     } catch (error) {
-      res.status(500).json({ error: 'Internal Server Error' });
+      res.status(500).json(error);
     }
   }
 
