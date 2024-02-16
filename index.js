@@ -7,7 +7,7 @@ export const app = express()
 app.use(json())
 app.use(cors())
 app.disable('x-powered-by')
-app.get('./', (req, res) => {
+app.get('/', (req, res) => {
   res.json("api")
 })
 app.use('/breeds', breedsRouter)
