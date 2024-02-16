@@ -1,8 +1,8 @@
 const prisma = require('../libs/prisma')
 
 class BreedModel {
-  static async getMany({ onlyNames, limit, top }) {
-    if (onlyNames) {
+  static async getMany({ onlynames, limit, top }) {
+    if (onlynames) {
       if (limit) {
         const breedNames = await prisma.breeds.findMany({
           select: {

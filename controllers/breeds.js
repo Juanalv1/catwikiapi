@@ -3,8 +3,8 @@ const BreedModel = require("../models/breed");
 class BreedController {
   static async getMany(req, res) {
     try {
-      const { onlyNames, limit, top } = req.query;
-      const breeds = await BreedModel.getMany({ onlyNames, limit, top });
+      const { onlynames, limit, top } = req.query;
+      const breeds = await BreedModel.getMany({ onlynames, limit, top });
       res.json(breeds);
     } catch (error) {
       res.status(500).json(error);
