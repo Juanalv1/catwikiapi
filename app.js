@@ -1,5 +1,6 @@
 
 const express = require('express')
+const { json } = require('express');  // Importa el middleware json
 const router = require('./routes/breeds')
 const cors = require('cors')
 const PORT = process.env.PORT ?? 1234
