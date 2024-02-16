@@ -17,7 +17,7 @@ class BreedController {
       const breed = await BreedModel.getByName({ name });
       res.json(breed);
     } catch (error) {
-      res.status(500).json({ error: 'Internal Server Error' });
+      res.status(500).json({ error: 'Internal Server Error' }, error);
     }
   }
 }
