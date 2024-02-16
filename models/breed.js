@@ -12,7 +12,6 @@ class BreedModel {
           },
           take: parseInt(limit)
         });
-        await prisma.$disconnect();
         return breedNames;
       } else {
         const breedNames = await prisma.breeds.findMany({
@@ -20,7 +19,6 @@ class BreedModel {
             name: true,
           },
         });
-        await prisma.$disconnect();
         return breedNames;
       }
     } else if (top) {
@@ -32,18 +30,15 @@ class BreedModel {
           reference_image_id: true
         }
       });
-      await prisma.$disconnect();
       return breeds;
     } else {
       if (limit) {
         const breeds = await prisma.breeds.findMany({
           take: parseInt(limit)
         });
-        await prisma.$disconnect();
         return breeds;
       } else {
         const breeds = await prisma.breeds.findMany();
-        await prisma.$disconnect();
         return breeds;
       }
     }
