@@ -1,29 +1,30 @@
-import { PrismaClient } from '@prisma/client'
-const prisma = new PrismaClient()
+const { PrismaClient } = require('@prisma/client');
+const fetch = require('node-fetch');  // Asegúrate de tener instalada la dependencia 'node-fetch'
 
-export class BreedModel {
-  static async getMany ({onlyNames, limit, top}) {
-    if (onlyNames){
+const prisma = new PrismaClient();
+
+class BreedModel {
+  static async getMany({ onlyNames, limit, top }) {
+    if (onlyNames) {
       if (limit) {
         const breedNames = await prisma.breeds.findMany({
           select: {
             name: true
           },
           take: parseInt(limit)
-        })
-        await prisma.$disconnect
-        return breedNames
+        });
+        await prisma.$disconnect();
+        return breedNames;
       } else {
         const breedNames = await prisma.breeds.findMany({
           select: {
             name: true,
           },
-        })
+        });
+        await prisma.$disconnect();
+        return breedNames;
       }
-      await prisma.$disconnect
-      return breedNames
-    }
-    else if (top){
+    } else if (top) {
       const breeds = await prisma.breeds.findMany({
         take: 10,
         select: {
@@ -31,42 +32,46 @@ export class BreedModel {
           description: true,
           reference_image_id: true
         }
-      })
-      await prisma.$disconnect
-      return breeds
-    }     else{
-      if(limit){
+      });
+      await prisma.$disconnect();
+      return breeds;
+    } else {
+      if (limit) {
         const breeds = await prisma.breeds.findMany({
           take: parseInt(limit)
-        })
-        await prisma.$disconnect
-        return breeds
-      }else {
-        const breeds = await prisma.breeds.findMany()
-        await prisma.$disconnect
-        return breeds
+        });
+        await prisma.$disconnect();
+        return breeds;
+      } else {
+        const breeds = await prisma.breeds.findMany();
+        await prisma.$disconnect();
+        return breeds;
       }
-
     }
   }
-  static async getByName ({name}){
-    const dencodedName = decodeURIComponent(name)
+
+  static async getByName({ name }) {
+    const dencodedName = decodeURIComponent(name);
     const breed = await prisma.breeds.findFirst({
-      where:{
+      where: {
         name: {
           equals: dencodedName,
           mode: 'insensitive'
         }
       }
-    })
+    });
+
     const getPhotos = async (breed) => {
-      const id = breed.id
-      const res = await fetch(`https://api.thecatapi.com/v1/images/search?limit=8&breed_ids=${id}`)
-      const images = await res.json()
-      const imagesUrls = images.map(image => image.url)
-      breed.imagesUrls = imagesUrls
-        }   
-    await getPhotos(breed)
-    return breed
+      const id = breed.id;
+      const res = await fetch(`https://api.thecatapi.com/v1/images/search?limit=8&breed_ids=${id}`);
+      const images = await res.json();
+      const imagesUrls = images.map(image => image.url);
+      breed.imagesUrls = imagesUrls;
+    };
+
+    await getPhotos(breed);
+    return breed;
   }
 }
+
+module.exports = BreedModel;

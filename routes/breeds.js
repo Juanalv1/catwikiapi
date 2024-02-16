@@ -1,7 +1,9 @@
-import { Router } from 'express'
-import { BreedController } from '../controllers/breeds.js'
+const router = require('express/router')
+const BreedController = require('../controllers/breeds.js') 
 
-export const breedsRouter = Router()
+const breedsRouter = router()
 
 breedsRouter.get('/', BreedController.getMany)
 breedsRouter.get('/:name', BreedController.getByName)
+
+module.exports = breedsRouter; 
