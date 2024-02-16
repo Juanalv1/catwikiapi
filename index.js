@@ -6,7 +6,7 @@ import cors from 'cors';
 
 const PORT = process.env.PORT ?? 1234
 
-const app = express()
+export const app = express()
 app.use(json())
 app.use(cors())
 app.disable('x-powered-by')
