@@ -1,6 +1,6 @@
 
 const express = require('express')
-const breedsRouter = require('./routes/breeds.js')
+const router = require('./routes/breeds')
 const cors = require('cors')
 const PORT = process.env.PORT ?? 1234
 
@@ -11,7 +11,7 @@ app.disable('x-powered-by')
 app.get('/', (req, res) => {
   res.json("api")
 })
-app.use('/breeds', breedsRouter)
+app.use('/breeds', router)
 
 app.listen(PORT, () => {
   console.log(`server listening on port http://localhost:${PORT}`)
