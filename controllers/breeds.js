@@ -1,4 +1,4 @@
-const { BreedModel } = require("../models/breed.js");
+const BreedModel = require("../models/breed.js");
 
 class BreedController {
   static async getMany(req, res) {
