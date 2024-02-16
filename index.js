@@ -1,9 +1,6 @@
 import express, {json} from 'express'
 import { breedsRouter } from './routes/breeds.js'
 import cors from 'cors';
-
-
-
 const PORT = process.env.PORT ?? 1234
 
 export const app = express()
