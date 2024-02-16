@@ -1,5 +1,4 @@
 const { PrismaClient } = require('@prisma/client');
-const fetch = require('node-fetch');  // Asegúrate de tener instalada la dependencia 'node-fetch'
 
 const prisma = new PrismaClient();
 
