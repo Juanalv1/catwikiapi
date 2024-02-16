@@ -1,0 +1,51 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model breeds {
+  weightimperial     String  @db.VarChar(8)
+  weightmetric       String  @db.VarChar(6)
+  id                 String  @id @db.VarChar(4)
+  name               String  @db.VarChar(20)
+  cfa_url            String? @db.VarChar(58)
+  vetstreet_url      String? @db.VarChar(57)
+  vcahospitals_url   String? @db.VarChar(70)
+  temperament        String  @db.VarChar(97)
+  origin             String  @db.VarChar(20)
+  country_codes      String  @db.VarChar(2)
+  country_code       String  @db.VarChar(2)
+  description        String  @db.VarChar(454)
+  life_span          String  @db.VarChar(7)
+  indoor             Int
+  lap                Int?
+  alt_names          String? @db.VarChar(83)
+  adaptability       Int
+  affection_level    Int
+  child_friendly     Int
+  dog_friendly       Int
+  energy_level       Int
+  grooming           Int
+  health_issues      Int
+  intelligence       Int
+  shedding_level     Int
+  social_needs       Int
+  stranger_friendly  Int
+  vocalisation       Int
+  experimental       Int
+  hairless           Int
+  natural_lvl        Int
+  rare               Int
+  rex                Int
+  suppressed_tail    Int
+  short_legs         Int
+  wikipedia_url      String? @db.VarChar(50)
+  hypoallergenic     Int
+  reference_image_id String? @db.VarChar(10)
+  cat_friendly       Int?
+  bidability         Int?
+}
